@@ -1,0 +1,188 @@
+<!doctype html>
+<head>
+
+  <!-- Meta -->
+  <meta charset="utf-8">
+
+  <title>ASL Fingerspelling Recognition - Corie Gee | Data Scientist</title>
+  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta content="yes" name="apple-mobile-web-app-capable">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+
+  <!-- RSS -->
+  <link rel="alternate" type="application/rss+xml" title="Corie Gee | Data Scientist - Welcome to my data science project portfolio. Explore a collection of data-driven projects showcasing expertise in data analysis, machine learning, and statistical modeling." href="http://localhost:4000/feed.xml">
+  <link rel="alternate" type="application/atom+xml" title="Corie Gee | Data Scientist - Welcome to my data science project portfolio. Explore a collection of data-driven projects showcasing expertise in data analysis, machine learning, and statistical modeling." href="http://localhost:4000/atom.xml">
+
+  <!-- Favicons -->
+  <link rel="icon" href="http://localhost:4000/img/favicon.png">
+
+  <!-- Fonts -->
+  <link href='https://fonts.googleapis.com/css?family=Open+Sans:400,300,600,400italic,700|Merriweather:400,300,300italic,400italic,700' rel='stylesheet' type='text/css'>
+
+  <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.min.css">
+
+  <!-- Styles -->
+  <link rel="stylesheet" href="/css/animate.min.css">
+  <link rel="stylesheet" href="/css/style.css">
+
+</head>
+<body class="">
+
+<div class="main container" id="top">
+
+  
+  <nav class="navbar navbar-default navbar-fixed-top">
+      <div class="container-fluid">
+          <div class="navbar-header">
+              <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+              </button>
+              <a class="navbar-brand" href="/">Corie Gee</a>
+          </div>
+          <div id="navbar" class="navbar-collapse collapse">
+            <ul class="nav navbar-nav navbar-right">
+              
+                <li>
+                  <a href="/about">About</a>
+                </li>
+              
+                <li>
+                  <a href="/">Portfolio</a>
+                </li>
+              
+                <li>
+                  <a href="https://github.com/coriegee">GitHub</a>
+                </li>
+              
+                <li>
+                  <a href="https://www.credly.com/users/corie-gee">Certifications</a>
+                </li>
+              
+                <li>
+                  <a href="/contact">Contact</a>
+                </li>
+              
+            </ul>
+          </div>
+      </div>
+  </nav>
+  
+
+
+  <article>
+    <div class="container">
+      <div class="row">
+        <div class="col-md-8 col-md-offset-2">
+
+          <html>
+<head>
+  <style>
+    h1 {
+      font-size: 48px;
+    }
+  </style>
+</head>
+<body>
+	<br />
+	<br />
+	<br />
+	<div align="center">
+	  <h1>Transforming ASL Fingerspelling Recognition with Transformer Neural Networks</h1>
+	</div>
+	<br />
+	<br />
+</body>
+</html>
+
+<p>github link here</p>
+
+<h2 id="introduction">Introduction:</h2>
+<p>In the ever-evolving landscape of data science and machine learning, the ability to tackle diverse and complex tasks is a hallmark of expertise. In this blog post, we delve into a fascinating data science project that showcases the power of modern neural networks in solving a unique challenge: American Sign Language (ASL) fingerspelling recognition. By combining the versatility of Transformers with meticulous data preprocessing and model design, we unveil a data science journey that promises to impress potential employers seeking versatile and skilled data scientists.</p>
+
+<h2 id="project-overview">Project Overview:</h2>
+<p>American Sign Language is a vital communication tool for the deaf and hard-of-hearing community. ASL fingerspelling involves representing letters of the alphabet using specific hand gestures. Our project focuses on creating a model capable of recognizing these gestures and converting them into text, effectively bridging the communication gap between the hearing and the deaf.</p>
+
+<h2 id="understanding-the-data">Understanding the Data:</h2>
+<p>Before diving into model development, understanding the data is crucial. We’re provided with a dataset of landmark coordinates captured from ASL fingerspelling videos. These coordinates describe the positions of the hands during various letters’ gestures. Additionally, a corresponding character label accompanies each gesture.</p>
+
+<h2 id="preprocessing-the-data">Preprocessing the Data:</h2>
+<p>Data preprocessing is the foundation of any successful machine learning project. In our case, preprocessing involves converting the landmark coordinates into a format suitable for model input. We also segment the data into training and validation sets and prepare it for efficient loading using TensorFlow’s data pipeline.</p>
+
+<h2 id="building-the-transformer-model">Building the Transformer Model:</h2>
+<p>The heart of our project lies in the design of the Transformer model. Transformers have revolutionized natural language processing, and we’re adapting their power for gesture recognition. The model consists of encoder and decoder components, each containing multiple layers of multi-head self-attention and feed-forward networks. These layers allow the model to learn and capture intricate relationships between the landmarks’ coordinates.</p>
+
+<h2 id="training-and-evaluation">Training and Evaluation:</h2>
+<p>Training the model involves feeding it with landmark sequences and their corresponding character labels. We optimize the model using the categorical cross-entropy loss function, which measures the dissimilarity between predicted and true character labels. During training, we also monitor a custom metric, the edit distance, which quantifies the similarity between predicted and true sequences.</p>
+
+<h2 id="visualizing-predictions">Visualizing Predictions:</h2>
+<p>One of the highlights of our project is the visualization of predictions. After every few epochs, we generate predictions from our trained model and display them alongside the true labels. This visual representation provides insights into the model’s progress and highlights its ability to convert gestures into meaningful text.</p>
+
+<h2 id="results-and-future-steps">Results and Future Steps:</h2>
+<p>Upon completing training and validation, we evaluate the model’s performance. The evaluation metric we use is the normalized total Levenshtein distance, which is a measure of sequence similarity. Our trained model showcases its prowess by achieving impressive recognition accuracy on the ASL fingerspelling task.</p>
+
+<h2 id="conclusion">Conclusion:</h2>
+<p>This data science project exemplifies the power of modern neural networks in addressing unique challenges. Through the marriage of Transformers and meticulous data handling, we’ve created a model capable of bridging the communication gap between the hearing and the deaf. The project’s significance extends beyond its technical achievements, demonstrating to potential employers the diverse skill set, creative problem-solving, and adaptability that make for an outstanding data scientist.</p>
+
+<p>As we continue pushing the boundaries of AI and machine learning, projects like these stand as a testament to the remarkable possibilities when technology meets empathy and inclusivity. This blog serves as a showcase not only of technical prowess but also of the potential to make a meaningful impact on society through data science.</p>
+
+<figure class="highlight"><pre><code class="language-python" data-lang="python"> 
+<span class="o">//</span> <span class="n">Python</span> <span class="n">code</span> <span class="k">with</span> <span class="n">syntax</span> <span class="n">highlighting</span>
+<span class="kn">import</span> <span class="nn">pandas</span> <span class="k">as</span> <span class="n">pd</span>
+
+<span class="k">print</span><span class="p">(</span><span class="s">'Hello world!'</span><span class="p">)</span></code></pre></figure>
+
+
+
+        </div>
+      </div>
+    </div>
+  </article>
+
+
+    <footer class="site-footer">
+      <div class="container">
+        <div class="row">
+
+          <div class="col-xs-12 col-md-2 col-md-offset-1">
+            <!-- <p class="text-muted text-left "><a href="http://localhost:4000"></a></p> -->
+			
+              <p class="text-muted text-left ">Contact: coriegee@outlook.com</p>
+		  
+          </div>
+
+          <div class="col-xs-12 col-md-6 col-md-offset-2">
+            <a class="section-jump" href="#top">
+              <i class="fa fa-angle-up fa-3x"></i>
+            </a>
+          </div>
+        </div>
+      </div>
+    </footer>
+
+  </div><!-- .main.container -->
+
+    <!-- JavaScript -->
+    <script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+    <script src="//maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
+    <script src="http://localhost:4000/js/wow.min.js"></script>
+    <script src="http://localhost:4000/js/app.js"></script>
+
+
+    <script>
+      (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+      (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+      m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+      })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+      ga('create', ' ', 'auto');
+      ga('send', 'pageview');
+
+    </script>
+
+    </body>
+</html>
+

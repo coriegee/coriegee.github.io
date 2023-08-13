@@ -1,0 +1,336 @@
+<!doctype html>
+<head>
+
+  <!-- Meta -->
+  <meta charset="utf-8">
+
+  <title>Analyzing Podcast Title Keywords vs View Counts - Corie Gee | Data Scientist</title>
+  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta content="yes" name="apple-mobile-web-app-capable">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+
+  <!-- RSS -->
+  <link rel="alternate" type="application/rss+xml" title="Corie Gee | Data Scientist - Welcome to my data science project portfolio. Explore a collection of data-driven projects showcasing expertise in data analysis, machine learning, and statistical modeling." href="http://localhost:4000/feed.xml">
+  <link rel="alternate" type="application/atom+xml" title="Corie Gee | Data Scientist - Welcome to my data science project portfolio. Explore a collection of data-driven projects showcasing expertise in data analysis, machine learning, and statistical modeling." href="http://localhost:4000/atom.xml">
+
+  <!-- Favicons -->
+  <link rel="icon" href="http://localhost:4000/img/favicon.png">
+
+  <!-- Fonts -->
+  <link href='https://fonts.googleapis.com/css?family=Open+Sans:400,300,600,400italic,700|Merriweather:400,300,300italic,400italic,700' rel='stylesheet' type='text/css'>
+
+  <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.min.css">
+
+  <!-- Styles -->
+  <link rel="stylesheet" href="/css/animate.min.css">
+  <link rel="stylesheet" href="/css/style.css">
+
+</head>
+<body class="">
+
+<div class="main container" id="top">
+
+  
+  <nav class="navbar navbar-default navbar-fixed-top">
+      <div class="container-fluid">
+          <div class="navbar-header">
+              <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+              </button>
+              <a class="navbar-brand" href="/">Corie Gee</a>
+          </div>
+          <div id="navbar" class="navbar-collapse collapse">
+            <ul class="nav navbar-nav navbar-right">
+              
+                <li>
+                  <a href="/about">About</a>
+                </li>
+              
+                <li>
+                  <a href="/">Portfolio</a>
+                </li>
+              
+                <li>
+                  <a href="https://github.com/coriegee">GitHub</a>
+                </li>
+              
+                <li>
+                  <a href="https://www.credly.com/users/corie-gee">Certifications</a>
+                </li>
+              
+                <li>
+                  <a href="/contact">Contact</a>
+                </li>
+              
+            </ul>
+          </div>
+      </div>
+  </nav>
+  
+
+
+  <article>
+    <div class="container">
+      <div class="row">
+        <div class="col-md-8 col-md-offset-2">
+
+          <html>
+<head>
+  <style>
+    h1 {
+      font-size: 48px;
+    }
+  </style>
+</head>
+<body>
+	<br />
+	<br />
+	<br />
+	<div align="center">
+	  <h1>Analyzing Podcast Title Keywords vs View Counts</h1>
+	</div>
+	<br />
+	<br />
+</body>
+</html>
+
+<p><a href="https://github.com/coriegee/DOAC-podcast-NLP">View the full project on GitHub</a></p>
+
+<h2 id="project-overview">Project Overview</h2>
+<p>In this project, we delve into the world of podcasts and explore the correlation between episode title keywords and view counts. Specifically, we examine the “Diary of a CEO” (DOAC) podcast, seeking to uncover insights that can guide content creation decisions, increase engagement, and optimize viewership. By analyzing the keywords in episode titles and their relationship with view counts, the aim is to provide actionable recommendations for enhancing the podcast’s performance.<br />
+<br /></p>
+
+<h2 id="problem-statement">Problem Statement</h2>
+<p>There are many variables that are known to affect podcast episode view count, a few examples would be the notoriety of the host and guest speaker, the episode release datetime and the episode duration. We are going to focus on just one, title keywords. The main challenge in this project is to identify which keywords in episode titles have a significant impact on episode view counts. By understanding these correlations, we can provide insights to podcast hosts on crafting titles and choosing topics that resonate with their audience and maximize viewer engagement.<br />
+<br /></p>
+
+<h2 id="data-collection-and-pre-processing">Data Collection and Pre-processing</h2>
+<p>The DOAC podcast episodes feature on most of the major platforms, Youtube was chosen to scrape podcast data from since most platforms do not show view count to the public. We start by scraping the @TheDiaryOfACEO channel and saving the data to a spreadsheet. The dataset contains <code class="language-plaintext highlighter-rouge">Title</code>, <code class="language-plaintext highlighter-rouge">URL</code>, and <code class="language-plaintext highlighter-rouge">Views</code> for 215 episodes uploaded by the channel over the last 2 years.</p>
+
+<figure class="highlight"><pre><code class="language-python" data-lang="python"><span class="c1"># Load the spreadsheet data into a pandas DataFrame
+</span><span class="n">data</span> <span class="o">=</span> <span class="n">pd</span><span class="p">.</span><span class="n">read_excel</span><span class="p">(</span><span class="s">'DOAC_youtube_dataset.xlsx'</span><span class="p">)</span></code></pre></figure>
+
+<p><img src="/img/posts/DOAC_dataset_head.png" alt="DOAC Dataset Header" /><br />
+<br /></p>
+
+<p>To prepare the episode titles for analysis, we preprocess the text by converting it to lowercase, removing punctuation, removing episode numbers and human names using the spaCy library. This leaves us with 807 words. Title character length and title word count is also calculated for data exploration.</p>
+
+<figure class="highlight"><pre><code class="language-python" data-lang="python"><span class="k">def</span> <span class="nf">preprocess_text</span><span class="p">(</span><span class="n">text</span><span class="p">):</span>
+    <span class="s">'''Prepare the title text for TF-IDF vectorizer'''</span>
+    
+    <span class="c1"># Convert to lowercase
+</span>    <span class="n">text</span> <span class="o">=</span> <span class="n">text</span><span class="p">.</span><span class="n">lower</span><span class="p">()</span>
+    
+    <span class="c1"># Remove punctuation
+</span>    <span class="n">text</span> <span class="o">=</span> <span class="n">text</span><span class="p">.</span><span class="n">translate</span><span class="p">(</span><span class="nb">str</span><span class="p">.</span><span class="n">maketrans</span><span class="p">(</span><span class="s">''</span><span class="p">,</span> <span class="s">''</span><span class="p">,</span> <span class="n">string</span><span class="p">.</span><span class="n">punctuation</span><span class="p">)).</span><span class="n">replace</span><span class="p">(</span><span class="s">'“'</span><span class="p">,</span> <span class="s">''</span><span class="p">).</span><span class="n">replace</span><span class="p">(</span><span class="s">'”'</span><span class="p">,</span> <span class="s">''</span><span class="p">)</span>
+
+    <span class="c1"># load spacy model
+</span>    <span class="n">nlp</span> <span class="o">=</span> <span class="n">spacy</span><span class="p">.</span><span class="n">load</span><span class="p">(</span><span class="s">"en_core_web_sm"</span><span class="p">)</span>
+
+    <span class="c1"># Remove people's names
+</span>    <span class="n">doc</span> <span class="o">=</span> <span class="n">nlp</span><span class="p">(</span><span class="n">text</span><span class="p">)</span>
+    <span class="k">for</span> <span class="n">name</span> <span class="ow">in</span> <span class="p">[</span><span class="n">ent</span> <span class="k">for</span> <span class="n">ent</span> <span class="ow">in</span> <span class="n">doc</span><span class="p">.</span><span class="n">ents</span><span class="p">]:</span>
+        <span class="k">if</span> <span class="n">name</span><span class="p">.</span><span class="n">label_</span> <span class="o">==</span> <span class="s">"PERSON"</span><span class="p">:</span>
+            <span class="n">text</span> <span class="o">=</span> <span class="n">text</span><span class="p">.</span><span class="n">replace</span><span class="p">(</span><span class="nb">str</span><span class="p">(</span><span class="n">name</span><span class="p">),</span> <span class="s">''</span><span class="p">)</span>
+
+    <span class="c1"># Remove less common names which aren't removed by the spacy model
+</span>    <span class="k">for</span> <span class="n">remove_name</span> <span class="ow">in</span> <span class="p">[</span><span class="s">' gawdat '</span><span class="p">,</span> <span class="s">' mo '</span><span class="p">,</span> <span class="s">' sinek '</span><span class="p">]:</span>
+        <span class="n">text</span> <span class="o">=</span> <span class="n">text</span><span class="p">.</span><span class="n">replace</span><span class="p">(</span><span class="n">remove_name</span><span class="p">,</span> <span class="s">''</span><span class="p">)</span>
+
+    <span class="c1"># Remove episode number using regex
+</span>    <span class="n">text</span> <span class="o">=</span> <span class="n">re</span><span class="p">.</span><span class="n">sub</span><span class="p">(</span><span class="sa">r</span><span class="s">'e\d+'</span><span class="p">,</span> <span class="s">''</span><span class="p">,</span> <span class="n">text</span><span class="p">)</span>
+
+    <span class="k">return</span> <span class="n">text</span>
+
+<span class="c1"># Apply preprocessing function to the 'Title' column
+</span><span class="n">data</span><span class="p">[</span><span class="s">'Preprocessed_titles'</span><span class="p">]</span> <span class="o">=</span> <span class="n">data</span><span class="p">[</span><span class="s">'Title'</span><span class="p">].</span><span class="n">progress_apply</span><span class="p">(</span><span class="n">preprocess_text</span><span class="p">)</span>
+
+<span class="c1"># Put the titles in a list
+</span><span class="n">corpus</span> <span class="o">=</span> <span class="n">data</span><span class="p">[</span><span class="s">'Preprocessed_titles'</span><span class="p">].</span><span class="n">tolist</span><span class="p">()</span></code></pre></figure>
+
+<p><img src="/img/posts/DOAC_processed_dataset_head.png" alt="DOAC Processed Dataset Header" /><br />
+<br /></p>
+
+<h2 id="exploratory-data-analysis-eda">Exploratory Data Analysis (EDA)</h2>
+<p>Before diving into the analysis, we explore the dataset’s key statistics and visualize important aspects. We calculate basic statistics for the view count, title character length, and title word count. Some key things to note:</p>
+<ul>
+  <li>The range of episode views are from 18,223 to 6,984,529 views. With an average of 747,133 views per episode. The skewness value of 3.287 indicates that the distribution of the data is right-skewed, i.e. the majority of the data points are concentrated on the left side of the distribution.</li>
+  <li>The range of title word count are from 7 to 20. With an average of 13 words per episode title
+<img src="/img/posts/DOAC_histogram_views.png" alt="Views Histogram" /><br />
+<br /></li>
+</ul>
+
+<h2 id="methodology-and-algorithms">Methodology and Algorithms</h2>
+<h3 id="tf-idf">TF-IDF</h3>
+<p>We employ the Term Frequency-Inverse Document Frequency (TF-IDF) method to analyze keyword importance. It combines how often a word appears in a document (TF) with how unique it is across all documents (IDF) to highlight words that are both frequent in a document and distinctive to that document collection. In this case, we will be calculating how frequent the word appears in an episode title and how unique it is across all titles. The formula for TF-IDF is below:</p>
+
+<p><em>TF(t, d) = (Number of times term t appears in document d) / (Total number of terms in document d)</em></p>
+
+<p><em>IDF(t, D) = log2(Total number of documents D / Number of documents containing term t)</em></p>
+
+<p><em>TF-IDF(t, d, D) = TF(t, d) * IDF(t, D)</em><br />
+<br /></p>
+
+<p>We will use the TfidfVectorizer from scikit-learn to compute TF-IDF scores.</p>
+
+<figure class="highlight"><pre><code class="language-python" data-lang="python"><span class="c1"># Create a TF-IDF vectorizer
+</span><span class="n">tfidf_vectorizer</span> <span class="o">=</span> <span class="n">TfidfVectorizer</span><span class="p">(</span><span class="n">stop_words</span><span class="o">=</span><span class="s">'english'</span><span class="p">)</span>
+
+<span class="c1"># Fit and transform the titles using the TF-IDF vectorizer
+</span><span class="n">tfidf_matrix</span> <span class="o">=</span> <span class="n">tfidf_vectorizer</span><span class="p">.</span><span class="n">fit_transform</span><span class="p">(</span><span class="n">corpus</span><span class="p">)</span>
+
+<span class="c1"># Convert the TF-IDF matrix to a DataFrame for easier analysis
+</span><span class="n">tfidf_df</span> <span class="o">=</span> <span class="n">pd</span><span class="p">.</span><span class="n">DataFrame</span><span class="p">(</span><span class="n">tfidf_matrix</span><span class="p">.</span><span class="n">toarray</span><span class="p">(),</span> <span class="n">columns</span><span class="o">=</span><span class="n">tfidf_vectorizer</span><span class="p">.</span><span class="n">get_feature_names_out</span><span class="p">())</span>
+
+<span class="c1"># Calculate the average TF-IDF score for each word across all titles
+</span><span class="n">average_tfidf_scores</span> <span class="o">=</span> <span class="n">tfidf_df</span><span class="p">.</span><span class="n">mean</span><span class="p">()</span>
+
+<span class="c1"># Sort the words by average TF-IDF score in descending order
+</span><span class="n">sorted_words</span> <span class="o">=</span> <span class="n">average_tfidf_scores</span><span class="p">.</span><span class="n">sort_values</span><span class="p">(</span><span class="n">ascending</span><span class="o">=</span><span class="bp">False</span><span class="p">)</span>
+
+<span class="c1"># Display the top N words with the highest average TF-IDF scores
+</span><span class="n">top_n</span> <span class="o">=</span> <span class="mi">20</span> 
+<span class="n">top_words</span> <span class="o">=</span> <span class="n">sorted_words</span><span class="p">.</span><span class="n">head</span><span class="p">(</span><span class="n">top_n</span><span class="p">)</span></code></pre></figure>
+
+<p><br /></p>
+
+<p>This produced a sorted list of words by TF-IDF scores. The top TF-IDF scoring keywords are ‘life’, ‘founder’ and ‘world’, meaning they are both frequent in titles and distinctive to the title collection. This list doesn’t really give us any insightful data to act upon just yet, so next we find the correlation between keyword TF-IDF and view count.<br />
+<img src="/img/posts/top_tf-idf_scores.png" alt="Top TF-IDF Scores" /><br />
+<br /></p>
+
+<p>Taking a look at the distribution of TF-IDF score for an example word ‘founder’, we observe that the distribution is right-skewed with the majority of TF-IDF score values are zero, since the word doesn’t appear in most titles.<br />
+<img src="/img/posts/DOAC_histogram_tf-idf.png" alt="TF-IDF Histogram" /><br />
+<br /></p>
+
+<h3 id="correlation-analysis">Correlation Analysis</h3>
+<p>When examining the relationship between two continuous variables like episode keywords’ TF-IDF scores and view counts, correlation analysis is a natural approach. However, since our data involves non-normal distributions and potential outliers, traditional correlation measures like Pearson’s correlation coefficient may not be the best fit.</p>
+
+<p>Instead, we choose to employ Spearman’s rank correlation coefficient. Spearman’s correlation assesses the strength and direction of the monotonic relationship between two variables, making it less sensitive to the specific distribution of data points and better suited for our context. Additionally, Spearman’s coefficient is more robust in the presence of outliers, as it relies on ranking the data rather than the raw values. This makes it a suitable choice when analyzing correlations in our dataset where keywords’ TF-IDF scores and view counts might not follow a linear relationship.</p>
+
+<p>Spearman’s rank correlation coefficient is calculated as:</p>
+
+<p><em>rho = 1 - 6 * sum(d_i^2) / (n * (n^2 - 1))</em></p>
+
+<p>where <em>d_i</em> represents the difference in ranks between the two variables for each observation, and <em>n</em> is the number of observations.</p>
+
+<figure class="highlight"><pre><code class="language-python" data-lang="python"><span class="c1"># Calculate Spearman's rank correlation coefficient and p-value between each keyword and view counts
+</span><span class="n">correlation_results</span> <span class="o">=</span> <span class="p">{}</span>
+
+<span class="k">for</span> <span class="n">keyword</span> <span class="ow">in</span> <span class="n">tfidf_df</span><span class="p">.</span><span class="n">columns</span><span class="p">:</span>
+    <span class="n">keyword_column</span> <span class="o">=</span> <span class="n">tfidf_df</span><span class="p">[</span><span class="n">keyword</span><span class="p">]</span>
+    <span class="n">correlation_coefficient</span><span class="p">,</span> <span class="n">p_value</span> <span class="o">=</span> <span class="n">spearmanr</span><span class="p">(</span><span class="n">keyword_column</span><span class="p">,</span> <span class="n">data</span><span class="p">[</span><span class="s">'Views'</span><span class="p">])</span>
+    <span class="n">correlation_results</span><span class="p">[</span><span class="n">keyword</span><span class="p">]</span> <span class="o">=</span> <span class="p">(</span><span class="n">correlation_coefficient</span><span class="p">,</span> <span class="n">p_value</span><span class="p">)</span>
+
+<span class="c1"># Sort the words by correlation in descending order
+</span><span class="n">sorted_words</span> <span class="o">=</span> <span class="nb">sorted</span><span class="p">(</span><span class="n">correlation_results</span><span class="p">.</span><span class="n">items</span><span class="p">(),</span> <span class="n">key</span><span class="o">=</span><span class="k">lambda</span> <span class="n">x</span><span class="p">:</span> <span class="n">x</span><span class="p">[</span><span class="mi">1</span><span class="p">][</span><span class="mi">0</span><span class="p">],</span> <span class="n">reverse</span><span class="o">=</span><span class="bp">True</span><span class="p">)</span></code></pre></figure>
+
+<p><br /></p>
+
+<h2 id="results-and-interpretation">Results and Interpretation</h2>
+<p>One way to visualize the results is through horizontal bar charts showing the top positively and negatively correlated keywords with view counts.<br />
+<img src="/img/posts/top_keyword_correlation_coeffic.png" alt="Top Keyword Correlation Coefficients" />
+<img src="/img/posts/bottom_keyword_correlation_coeffic.png" alt="Bottom Keyword Correlation Coefficients" /><br />
+<br /></p>
+
+<p>We won’t interperet these results just yet. We first applied the commonly used significance level of p_value &lt; 0.05 to indicate if the observed correlation coefficients are statistically significant. In other words, it is highly unlikely that such a correlation coefficient could have occurred due to random chance alone.</p>
+
+<figure class="highlight"><pre><code class="language-python" data-lang="python"><span class="c1"># Create a DataFrame, calculate if p &lt; 0.05 and then filter out statistically insignificant keywords
+</span><span class="n">word_corr_df</span> <span class="o">=</span> <span class="n">pd</span><span class="p">.</span><span class="n">DataFrame</span><span class="p">([[</span><span class="n">keyword</span><span class="p">,</span> <span class="n">score_tup</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">score_tup</span><span class="p">[</span><span class="mi">1</span><span class="p">]]</span> <span class="k">for</span> <span class="n">keyword</span><span class="p">,</span> <span class="n">score_tup</span> <span class="ow">in</span> <span class="n">sorted_words</span><span class="p">],</span> <span class="n">columns</span><span class="o">=</span><span class="p">[</span><span class="s">'word'</span><span class="p">,</span> <span class="s">'coefficient'</span><span class="p">,</span> <span class="s">'p_value'</span><span class="p">])</span>
+<span class="n">word_corr_df</span><span class="p">[</span><span class="s">'statistically_significant'</span><span class="p">]</span> <span class="o">=</span> <span class="n">word_corr_df</span><span class="p">[</span><span class="s">'p_value'</span><span class="p">].</span><span class="nb">apply</span><span class="p">(</span><span class="k">lambda</span> <span class="n">x</span><span class="p">:</span> <span class="n">x</span> <span class="o">&lt;</span> <span class="mf">0.05</span><span class="p">)</span>
+<span class="n">word_corr_df</span> <span class="o">=</span> <span class="n">word_corr_df</span><span class="p">[</span><span class="n">word_corr_df</span><span class="p">[</span><span class="s">'statistically_significant'</span><span class="p">]</span> <span class="o">==</span> <span class="bp">True</span><span class="p">]</span></code></pre></figure>
+
+<p><img src="/img/posts/correlation_dataframe.png" alt="Correlation DataFrame" /><br />
+<br /></p>
+
+<p>In this case, we are left with only 22 keywords that are considered statistically significant in correlation to views. The majority of words have only a small sample size across the entire dataset and thus there is possibly not enough data points to detect significant effects.<br />
+<br /></p>
+
+<p>All the correlation coefficients are between 0.3 and -0.3, meaning the strongest correlations are still considered weak. There are of course many variables that will affect the view count of episodes so to find some weak correlations here is still somewhat interesting and potentially useful.
+These 22 keywords are visualised here:<br />
+<img src="/img/posts/significant_keywords_with_strong_corr.png" alt="Significant Keywords with Strong Correlation" /><br />
+<br /></p>
+
+<p><strong>There are some interesting findings here as well as some expected results</strong></p>
+
+<p>Positive Correlations:</p>
+<ul>
+  <li>“man” was the title word that had the highest positive correlation with episode view count, suggesting that the audience is more inclined to watch an episode if the guest speaker is male, possibly due to a larger male audience (just a hypothesis without access to the data to validate this).</li>
+  <li>Lots of words within the “Health and Wellbeing” category (“weight”, “loss”, “calories”, “sugar”, “sleep”) that have a positive correlation to views, suggesting the audience is more likely to watch Health and Wellbeing topics than anything else.</li>
+  <li>The nouns “doctor”, “expert” and “scientist” suggesting viewers prefer to watch episodes with guests that are considered to be very knowledgeable about or skilful in a particular area. Perhaps this is expected, but it is valuable to know that these words should be included in the title if applicable.</li>
+</ul>
+
+<p>Negative Correlations:</p>
+<ul>
+  <li>Interestingly, “founder” has the most negative correlation to view count at -0.29. Suggesting that the viewers are not that interested in conversations with guest founders and are less likely to watch an episode when this word is mentioned.</li>
+  <li>Similarly, “billion” and “dollar” are negatively correlated to view count, indicating the audience of DOAC are suprisingly not as interested in watching episodes about making money or businesses as they are about losing weight and improving health.<br />
+<br /></li>
+</ul>
+
+<h3 id="validation">Validation</h3>
+<p>It will help us to understand and validate this difference between the most positively and negatively correlated words “man” and “founder” in terms of view count if we visualise them together in a scatter plot.
+<img src="/img/posts/scatterplot.png" alt="Scatterplot" />
+Each data point is a single title. By removing the titles with zero-count occurences (TF-IDF score of 0) we can quite easily see here that there is indeed a significant difference between the red and blue clusters. When the word “man” is used in the title the number of episode views is increased relative to when the word “founder” is present in the title, validating our Spearman’s rank correlation coefficient results above.<br />
+<br /></p>
+
+<h2 id="conclusion">Conclusion</h2>
+<p>We’ve successfully analyzed the correlation between episode title keywords and view counts for the “Diary of a CEO” podcast. We’ve highlighted keywords that have a significant impact on viewer engagement and provided actionable recommendations for improving content creation. While there are limitations to the analysis, such as weak correlations and the influence of other factors, the insights gained contribute to informed decision-making in podcast production.</p>
+
+<p>By applying natural language processing techniques and correlation analysis, we’ve empowered podcast hosts to enhance their reach, resonate with their audience, and ultimately create more impactful content. This project showcases the power of data science in uncovering hidden patterns and guiding strategic decisions in the podcasting realm.
+<br /></p>
+
+<p><a href="https://github.com/coriegee/DOAC-podcast-NLP">View the full project on GitHub</a></p>
+
+
+        </div>
+      </div>
+    </div>
+  </article>
+
+
+    <footer class="site-footer">
+      <div class="container">
+        <div class="row">
+
+          <div class="col-xs-12 col-md-2 col-md-offset-1">
+            <!-- <p class="text-muted text-left "><a href="http://localhost:4000"></a></p> -->
+			
+              <p class="text-muted text-left ">Contact: coriegee@outlook.com</p>
+		  
+          </div>
+
+          <div class="col-xs-12 col-md-6 col-md-offset-2">
+            <a class="section-jump" href="#top">
+              <i class="fa fa-angle-up fa-3x"></i>
+            </a>
+          </div>
+        </div>
+      </div>
+    </footer>
+
+  </div><!-- .main.container -->
+
+    <!-- JavaScript -->
+    <script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+    <script src="//maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
+    <script src="http://localhost:4000/js/wow.min.js"></script>
+    <script src="http://localhost:4000/js/app.js"></script>
+
+
+    <script>
+      (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+      (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+      m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+      })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+      ga('create', ' ', 'auto');
+      ga('send', 'pageview');
+
+    </script>
+
+    </body>
+</html>
+

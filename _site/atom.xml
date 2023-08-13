@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+
+ <title>Corie Gee | Data Scientist</title>
+ <link href="http://localhost:4000/atom.xml" rel="self"/>
+ <link href="http://localhost:4000/"/>
+ <updated>2023-08-13T21:55:17+01:00</updated>
+ <id>http://localhost:4000</id>
+ <author>
+   <name>Corie Gee</name>
+   <email></email>
+ </author>
+
+ 
+ <entry>
+   <title>Podcast NLP Analysis</title>
+   <link href="http://localhost:4000/development/2023/08/13/podcast-nlp.html"/>
+   <updated>2023-08-13T17:57:00+01:00</updated>
+   <id>http://localhost:4000/development/2023/08/13/podcast-nlp</id>
+   <content type="html">
+</content>
+ </entry>
+ 
+ <entry>
+   <title>ASL Fingerspelling Recognition</title>
+   <link href="http://localhost:4000/development/2023/06/20/asl-fingerspelling.html"/>
+   <updated>2023-06-20T16:56:00+01:00</updated>
+   <id>http://localhost:4000/development/2023/06/20/asl-fingerspelling</id>
+   <content type="html">
+</content>
+ </entry>
+ 
+
+</feed>
