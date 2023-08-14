@@ -42,15 +42,15 @@ permalink: /about/
 	</div>
 	<br>
 	<br>
-	<div class="image-container">
-		<div class="text-block">
-		  <p>Hey there! I'm a results-driven data scientist with over 4 years of experience in statistical analysis, machine learning, and data visualization. My journey has been fueled by a passion for turning complex datasets into actionable insights that fuel business growth.
+	<div class="image-container" style="display: flex; flex-direction: column; align-items: center;">
+	  <img src="https://media.licdn.com/dms/image/C4D03AQGv-ja4HnSNMA/profile-displayphoto-shrink_200_200/0/1603180377449?e=1692835200&v=beta&t=nkOCs2I-1goGDLNMTQSHS3gE04PiPrIVR-PRq-wMuQw" alt="Image" style="width: 200px; height: 200px; margin-bottom: 20px;">
+	  <div class="text-block">
+		<p>Hey there! I'm a results-driven data scientist with over 4 years of experience in statistical analysis, machine learning, and data visualization. My journey has been fueled by a passion for turning complex datasets into actionable insights that fuel business growth.
 		  <br><br>With a strong foundation in Python, SQL, Tableau, and Power BI, I've designed and deployed dashboards that analyze trends and track various metrics. My expertise in developing statistical measures and data visualizations has been instrumental in identifying emerging issues and cost-saving opportunities at various companies.
 		  <br><br>My work doesn't stop there – I've built predictive models for business decision-making, developed real-time monitoring dashboards, and contributed to digital transformation efforts. I'm also certified in AWS Cloud, Tableau, and Alteryx, demonstrating my commitment to staying current in the ever-evolving data landscape.
 		  <br><br>I bring a blend of technical skills and a passion for delivering impactful solutions through data-driven insights. Let's connect and explore how I can contribute to your data science needs!
-		  </p>
-		</div>
-		<img src="https://media.licdn.com/dms/image/C4D03AQGv-ja4HnSNMA/profile-displayphoto-shrink_200_200/0/1603180377449?e=1692835200&v=beta&t=nkOCs2I-1goGDLNMTQSHS3gE04PiPrIVR-PRq-wMuQw" alt="Image" style="float: left; width: 200px; height: 200px; margin-right: 20px;">
+		</p>
+	  </div>
 	</div>
 	<br>
 	<br>
