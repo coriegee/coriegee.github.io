@@ -1,7 +1,7 @@
 ---
 layout: inner
 title: Analyzing Podcast Title Keywords vs View Counts
-permalink: /project_2/
+permalink: /podcast_nlp/
 ---
 <html>
 <head>

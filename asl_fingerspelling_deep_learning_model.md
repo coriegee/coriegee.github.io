@@ -1,7 +1,7 @@
 ---
 layout: inner
 title: ASL Fingerspelling Recognition
-permalink: /project_1/
+permalink: /asl_fingerspelling_deep_learning_model/
 ---
 <html>
 <head>
