@@ -43,7 +43,7 @@ permalink: /about/
 	<br>
 	<br>
 	<div class="image-container" style="display: flex; flex-direction: column; align-items: center;">
-	  <img src="https://media.licdn.com/dms/image/C4D03AQGv-ja4HnSNMA/profile-displayphoto-shrink_200_200/0/1603180377449?e=1692835200&v=beta&t=nkOCs2I-1goGDLNMTQSHS3gE04PiPrIVR-PRq-wMuQw" alt="Image" style="width: 200px; height: 200px; margin-bottom: 20px;">
+	  <img src="https://media.licdn.com/dms/image/D4E03AQHKtz_2RJ6KSw/profile-displayphoto-shrink_200_200/0/1693755928001?e=1699488000&v=beta&t=v5ZPeqjY83ftKzgMlbugrARjACVk1xtGcfsyLsvcu3U" alt="Image" style="width: 200px; height: 200px; margin-bottom: 20px;">
 	  <div class="text-block">
 		<p>Hey there! I'm a results-driven data scientist with over 4 years of experience in statistical analysis, machine learning, and data visualization. My journey has been fueled by a passion for turning complex datasets into actionable insights that fuel business growth.
 		  <br><br>With a strong foundation in Python, SQL, Tableau, and Power BI, I've designed and deployed dashboards that analyze trends and track various metrics. My expertise in developing statistical measures and data visualizations has been instrumental in identifying emerging issues and cost-saving opportunities at various companies.
