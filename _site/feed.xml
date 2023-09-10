@@ -1,34 +1,13 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
-    <title>Corie Gee | Data Scientist</title>
-    <description>Welcome to my data science project portfolio. Explore a collection of data-driven projects showcasing expertise in data analysis, machine learning, and statistical modeling.</description>
+    <title>Corie Gee</title>
+    <description>Welcome to my project portfolio. Explore a collection of data-driven projects showcasing expertise in data analysis, machine learning, and statistical modeling.</description>
     <link>http://localhost:4000/</link>
     <atom:link href="http://localhost:4000/feed.xml" rel="self" type="application/rss+xml"/>
-    <pubDate>Sun, 10 Sep 2023 11:02:54 +0100</pubDate>
-    <lastBuildDate>Sun, 10 Sep 2023 11:02:54 +0100</lastBuildDate>
+    <pubDate>Sun, 10 Sep 2023 14:35:27 +0100</pubDate>
+    <lastBuildDate>Sun, 10 Sep 2023 14:35:27 +0100</lastBuildDate>
     <generator>Jekyll v3.9.3</generator>
-    
-      <item>
-        <title>Podcast NLP Analysis</title>
-        <description>
-</description>
-        <pubDate>Sun, 13 Aug 2023 17:57:00 +0100</pubDate>
-        <link>http://localhost:4000/development/2023/08/13/podcast-nlp.html</link>
-        <guid isPermaLink="true">http://localhost:4000/development/2023/08/13/podcast-nlp.html</guid>
-        
-        <category>Python</category>
-        
-        <category>NLP</category>
-        
-        <category>TF-IDF</category>
-        
-        <category>Correlation</category>
-        
-        
-        <category>development</category>
-        
-      </item>
     
       <item>
         <title>ASL Fingerspelling Recognition</title>
@@ -45,6 +24,27 @@
         <category>Transformer</category>
         
         <category>video-to-text</category>
+        
+        
+        <category>development</category>
+        
+      </item>
+    
+      <item>
+        <title>Podcast NLP Analysis</title>
+        <description>
+</description>
+        <pubDate>Fri, 13 Jan 2023 16:57:00 +0000</pubDate>
+        <link>http://localhost:4000/development/2023/01/13/podcast-nlp.html</link>
+        <guid isPermaLink="true">http://localhost:4000/development/2023/01/13/podcast-nlp.html</guid>
+        
+        <category>Python</category>
+        
+        <category>NLP</category>
+        
+        <category>TF-IDF</category>
+        
+        <category>Correlation</category>
         
         
         <category>development</category>
